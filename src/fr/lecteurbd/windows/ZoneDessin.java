@@ -5,13 +5,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ZoneDessin extends JPanel{
+import fr.lecteurbd.stock.BD;
+import fr.lecteurbd.utils.UnzipFile;
+
+public class ZoneDessin extends JPanel implements ActionListener{
 
 	Image acceuil;
 	JButton ouvrir;
@@ -25,11 +31,12 @@ public class ZoneDessin extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		
+	
 		setLayout(null);
 		ouvrir = new JButton("Ouvrir une BD");
 		ouvrir.setBounds(120,230,150,40);
+		ouvrir.addActionListener(this);
+		ouvrir.setActionCommand("bouton_ouvrir");
 		
 		add(ouvrir);
 		
@@ -41,7 +48,27 @@ public class ZoneDessin extends JPanel{
 		Font font = new Font("Arial", Font.BOLD, 12);
 		g.setFont(font);
 		g.setColor(Color.white);
-		g.drawString("Format de fichier autorisé: *.cbz, *.cbr", 85, 285);
+		g.drawString("Format de fichier autorisé: *.cbz, *.zip", 85, 285);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("bouton_ouvrir")) {
+			JFileChooser selec = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichiers archive comics", "cbr", "cbz");
+			selec.addChoosableFileFilter(filter);
+			selec.setFileFilter(filter);
+			
+			int resultat = selec.showOpenDialog(null);
+			
+			if(resultat == JFileChooser.APPROVE_OPTION) {
+				String file = selec.getSelectedFile().getAbsolutePath();
+				
+				UnzipFile.extract(file);
+				
+			}
+		}
 		
 	}
 	
