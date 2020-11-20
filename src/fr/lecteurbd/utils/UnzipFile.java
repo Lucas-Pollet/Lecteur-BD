@@ -1,11 +1,15 @@
 package fr.lecteurbd.utils;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import javax.swing.JOptionPane;
 
 import fr.lecteurbd.Main;
 import fr.lecteurbd.stock.BD;
@@ -21,7 +25,7 @@ public class UnzipFile {
     	File destDir = new File("src/tmp/"+file.getName());
         if(!destDir.exists()) destDir.mkdirs();
 
-        Main.bd = new BD();
+        Main.bd = new BD(file.getName());
         
         int page=1;
         
@@ -61,7 +65,33 @@ public class UnzipFile {
             e.printStackTrace();
         }
         
-        new LectureWindow("Lecture : " + file.getName());
+        File fpage = new File("src/tmp/"+file.getName()+"/page.dat"); 
+        
+        if(fpage.exists()) {
+        	try {
+        		DataInputStream fR  = new DataInputStream(new FileInputStream("src/tmp/"+file.getName()+"/page.dat"));
+        		try {
+					int actualPage = fR.readInt();
+					Main.bd.setCurrent_page(actualPage);
+					
+					new LectureWindow("Lecture : " + file.getName());
+					
+					JOptionPane.showMessageDialog(null,"Votre BD a reprise à la page que vous lisiez !","Info", JOptionPane.INFORMATION_MESSAGE);	
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+        	} catch (FileNotFoundException e) {
+        		e.printStackTrace();
+        	}
+
+        }else{	
+        	new LectureWindow("Lecture : " + file.getName());
+        }
+
+        
+        
     }
 	
 }

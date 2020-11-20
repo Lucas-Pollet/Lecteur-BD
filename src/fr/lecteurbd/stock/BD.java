@@ -6,10 +6,12 @@ public class BD {
 	
 	private Vector<Page> liste_page;
 	private int current_page;
+	private String name_bd;
 	
-	public BD() {
+	public BD(String name) {
 		liste_page = new Vector<Page>();
 		current_page = 0;
+		this.name_bd=name;
 	}
 
 	public Vector<Page> getListe_page() {
@@ -24,6 +26,8 @@ public class BD {
 		this.current_page = current_page;
 	}
 	
-	
+	public String getNameBD() {
+		return name_bd;
+	}
 	
 }

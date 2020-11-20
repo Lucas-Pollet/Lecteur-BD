@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import fr.lecteurbd.stock.BD;
 import fr.lecteurbd.utils.UnzipFile;
 
 public class ZoneDessin extends JPanel implements ActionListener{
@@ -42,7 +41,7 @@ public class ZoneDessin extends JPanel implements ActionListener{
 		
 	}	
 	
-	public void paint(Graphics g){
+	public void paintComponent(Graphics g){
 		g.drawImage(acceuil, 0, 0, this);
 		
 		Font font = new Font("Arial", Font.BOLD, 12);
@@ -56,8 +55,9 @@ public class ZoneDessin extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("bouton_ouvrir")) {
 			JFileChooser selec = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichiers archive comics", "cbr", "cbz");
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichiers archive comics (.cbz)", "cbz");
 			selec.addChoosableFileFilter(filter);
+			selec.addChoosableFileFilter(new FileNameExtensionFilter("Fichiers zip (.zip)", "zip"));
 			selec.setFileFilter(filter);
 			
 			int resultat = selec.showOpenDialog(null);

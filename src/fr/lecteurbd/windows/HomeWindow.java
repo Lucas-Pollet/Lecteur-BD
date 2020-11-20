@@ -9,7 +9,6 @@ public class HomeWindow extends JFrame{
 		super(nom);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
 		setResizable(false);
 		//setAlwaysOnTop(true);
 		//setSize(400, 500);
@@ -20,7 +19,7 @@ public class HomeWindow extends JFrame{
 		pack();
 		
 		setVisible(true);
-		
+		setLocationRelativeTo(null);
 	}
 	
 }
