@@ -66,19 +66,23 @@ public class UnzipFile {
         }
         
         File fpage = new File("src/tmp/"+file.getName()+"/page.dat"); 
-        
-        if(fpage.exists()) {
+        String options[] = {"Oui", "Non"};
+					   int retour = JOptionPane.showOptionDialog(null,
+								"Reprendre la lecture où vous vous êtes arrêté ?", "Reprendre",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
+					   
+		
+					   
+        if(fpage.exists() && (retour == 0)) {
         	try {
         		DataInputStream fR  = new DataInputStream(new FileInputStream("src/tmp/"+file.getName()+"/page.dat"));
         		try {
 					int actualPage = fR.readInt();
 					Main.bd.setCurrent_page(actualPage);
 					
-					new LectureWindow("Lecture : " + file.getName());
-					
-					JOptionPane.showMessageDialog(null,"Votre BD a reprise à la page que vous lisiez !","Info", JOptionPane.INFORMATION_MESSAGE);	
+					new LectureWindow("Lecture : " + file.getName());		
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -89,10 +93,6 @@ public class UnzipFile {
         }else{	
         	new LectureWindow("Lecture : " + file.getName());
         }
-
-        
-        
+             
     }
-	
 }
- 

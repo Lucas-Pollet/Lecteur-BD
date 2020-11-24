@@ -64,7 +64,7 @@ public class LoadPage extends JPanel implements ActionListener, MouseWheelListen
 		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
 		try {
-			fond = ImageIO.read(new File("img/fondapp.jpg"));
+			fond = ImageIO.read(new File("src/img/fondapp.jpg"));
 			page = ImageIO.read(new File(Main.bd.getListe_page().get(Main.bd.getCurrent_page()).getPath()));
 		} catch (IOException e) {
 			e.printStackTrace();

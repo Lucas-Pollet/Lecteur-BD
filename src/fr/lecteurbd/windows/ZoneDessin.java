@@ -26,7 +26,7 @@ public class ZoneDessin extends JPanel implements ActionListener{
 
 		try {
 			System.out.println("try to read acceuil");
-			acceuil = ImageIO.read(new File("img/acceuil.png"));
+			acceuil = ImageIO.read(new File("src/img/acceuil.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
