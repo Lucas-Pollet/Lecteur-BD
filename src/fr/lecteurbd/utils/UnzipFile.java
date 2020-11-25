@@ -17,7 +17,7 @@ import fr.lecteurbd.stock.Page;
 import fr.lecteurbd.windows.LectureWindow;
 
 public class UnzipFile {
-
+	
     public static void extract(String fileZip) {
     	System.out.println("extract "+fileZip);
         
@@ -41,8 +41,7 @@ public class UnzipFile {
             while(ze != null){
                 String fileName = ze.getName();
                 File newFile = new File(destDir + File.separator + fileName);
-                //System.out.println("Unzipping to "+newFile.getAbsolutePath());
-  
+                
                 Main.bd.getListe_page().add(new Page(page, fileName, newFile.getAbsolutePath()));
                 
                 new File(newFile.getParent()).mkdirs();
@@ -71,9 +70,7 @@ public class UnzipFile {
 								"Reprendre la lecture où vous vous êtes arrêté ?", "Reprendre",
 								JOptionPane.YES_NO_OPTION,
 								JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
-					   
-		
-					   
+					   			   
         if(fpage.exists() && (retour == 0)) {
         	try {
         		DataInputStream fR  = new DataInputStream(new FileInputStream("src/tmp/"+file.getName()+"/page.dat"));

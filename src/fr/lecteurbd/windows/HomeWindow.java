@@ -13,7 +13,7 @@ public class HomeWindow extends JFrame{
 		//setAlwaysOnTop(true);
 		//setSize(400, 500);
 		
-		ZoneDessin zone = new ZoneDessin();
+		Home_Panel zone = new Home_Panel();
 		getContentPane().add(zone);
 		
 		pack();

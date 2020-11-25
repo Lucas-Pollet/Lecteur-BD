@@ -1,6 +1,8 @@
 package fr.lecteurbd.windows;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.DataOutputStream;
@@ -9,34 +11,61 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import fr.lecteurbd.Main;
+import fr.lecteurbd.utils.OpenSelector;
 
 
-public class LectureWindow extends JFrame {
+public class LectureWindow extends JFrame implements ActionListener {
 
 	public LectureWindow(String nom) {
 		super(nom);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		//setAlwaysOnTop(true);
-		//setSize(400, 500);
 
 		setBackground(Color.GRAY);
 
-		LoadPage load = new LoadPage();
+		Page_Panel load = new Page_Panel();
 		load.setFocusable(true);
-		
+
 		this.add(load);
 
-		pack();
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		JMenu menu = new JMenu("Fichier");
+		menuBar.add(menu);
+		JMenu help = new JMenu("Aide");
+		menuBar.add(help);
 		
+		JMenuItem ouvrir =new JMenuItem("Ouvrir");
+		menu.add(ouvrir);
+		JMenuItem quitter =new JMenuItem("Quitter");
+		menu.add(quitter);
+		
+		JMenuItem morehelp =new JMenuItem("Cliquez pour avoir de l'aide");
+		help.add(morehelp);
+		
+		quitter.setActionCommand("menu_quitter");
+		quitter.addActionListener(this);
+
+		ouvrir.setActionCommand("menu_ouvrir");
+		ouvrir.addActionListener(this);
+		
+		morehelp.setActionCommand("menu_aide");
+		morehelp.addActionListener(this);
+		
+		
+		pack();
+
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-			
+
 		setVisible(true);
 
-		
 		// Sauvegarde de la page en cours
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -47,7 +76,6 @@ public class LectureWindow extends JFrame {
 					try {
 						fW.writeInt(Main.bd.getCurrent_page());
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				} catch (FileNotFoundException e1) {
@@ -55,7 +83,24 @@ public class LectureWindow extends JFrame {
 				}
 			}
 		});
-		
+
 	}
-	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		{
+			if (e.getActionCommand().equals("menu_quitter"))
+				System.exit(0);
+			if (e.getActionCommand().equals("menu_ouvrir"))
+				new OpenSelector().open();
+			if (e.getActionCommand().equals("menu_aide")) 
+				JOptionPane.showMessageDialog(null,
+						 "Touches utiles : \nTouches Z-Q-S-D: Déplacement de la page\nTouches ← ou →: Déplacement entre les pages\n"
+						 + "Touche R: Reset de la page\nMolette de la souris: Réglage du zoom\nTouche F: Aller à une page",
+						 "Aide",
+						 JOptionPane.INFORMATION_MESSAGE);
+			
+		}
+	}
+
 }

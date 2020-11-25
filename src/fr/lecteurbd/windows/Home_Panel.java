@@ -12,21 +12,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import fr.lecteurbd.utils.UnzipFile;
+import fr.lecteurbd.utils.OpenSelector;
 
-public class ZoneDessin extends JPanel implements ActionListener{
+public class Home_Panel extends JPanel implements ActionListener{
 
 	Image acceuil;
 	JButton ouvrir;
 	
-	public ZoneDessin() {
+	public Home_Panel() {
 		setPreferredSize(new Dimension(400,500));
 
 		try {
 			System.out.println("try to read acceuil");
-			acceuil = ImageIO.read(new File("src/img/acceuil.png"));
+			acceuil = ImageIO.read(getClass().getResourceAsStream("/img/acceuil.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,20 +53,7 @@ public class ZoneDessin extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("bouton_ouvrir")) {
-			JFileChooser selec = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichiers archive comics (.cbz)", "cbz");
-			selec.addChoosableFileFilter(filter);
-			selec.addChoosableFileFilter(new FileNameExtensionFilter("Fichiers zip (.zip)", "zip"));
-			selec.setFileFilter(filter);
-			
-			int resultat = selec.showOpenDialog(null);
-			
-			if(resultat == JFileChooser.APPROVE_OPTION) {
-				String file = selec.getSelectedFile().getAbsolutePath();
-				
-				UnzipFile.extract(file);
-				
-			}
+			new OpenSelector().open();
 		}
 		
 	}
