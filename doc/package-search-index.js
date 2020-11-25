@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"fr.lecteurbd"},{"l":"fr.lecteurbd.stock"},{"l":"fr.lecteurbd.utils"},{"l":"fr.lecteurbd.windows"}];updateSearchResults();

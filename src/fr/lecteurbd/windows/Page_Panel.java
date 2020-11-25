@@ -25,19 +25,48 @@ import javax.swing.JPanel;
 
 import fr.lecteurbd.Main;
 
+/**
+ * Classe du panel de la fenetre de lecture
+ * @author Lucas POLLET - Jean PERRUT
+ *
+ */
 public class Page_Panel extends JPanel implements ActionListener, MouseWheelListener, KeyListener {
 
+	/**
+	 * Bouton précédent
+	 */
 	private JButton before;
+	/**
+	 * Bouton suivant
+	 */
 	private JButton after;
 	
+	/**
+	 * Variable de réglage du zoom
+	 */
     public float zoom = 0.75f;
 	
+    /**
+     * Variable de l'image page en lecture
+     */
     private BufferedImage page;
+    /**
+     * Variable de l'image de fond
+     */
     private BufferedImage fond;
     
+    /**
+     * Variable permettant de gérer la positon en x de la page
+     */
     private int x_loc = 0;
+    /**
+     * Variable permettant de gérer la positon en y de la page
+     */
     private int y_loc = 0;
     
+    /**
+     * Constructeur du panel de la page de lecture
+     */
 	public Page_Panel() {
 		setLayout(null);
 		setPreferredSize(new Dimension(800, 800));
@@ -59,7 +88,9 @@ public class Page_Panel extends JPanel implements ActionListener, MouseWheelList
 		
 	}	
 
-	
+	/**
+	 * Fonction qui dessine les composants
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
@@ -103,6 +134,9 @@ public class Page_Panel extends JPanel implements ActionListener, MouseWheelList
 		}
 	}
 
+	/**
+	 * Listener des actions
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {	
 		
@@ -116,13 +150,18 @@ public class Page_Panel extends JPanel implements ActionListener, MouseWheelList
 		}
 	}
 
+	/**
+	 * Listener des mouvements de la molette
+	 */
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		zoom = Math.max(0, zoom - 0.03f * e.getWheelRotation());
 		repaint();		
 	}
 
-
+	/**
+	 * Listener des appuies sur une touche
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		requestFocus();

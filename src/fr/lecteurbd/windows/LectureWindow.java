@@ -19,9 +19,17 @@ import javax.swing.JOptionPane;
 import fr.lecteurbd.Main;
 import fr.lecteurbd.utils.OpenSelector;
 
-
+/**
+ * Classe de la fenetre de lecture de la BD
+ * @author Lucas POLLET - Jean PERRUT
+ *
+ */
 public class LectureWindow extends JFrame implements ActionListener {
 
+	/**
+	 * Constructeur de la fenetre de lecture
+	 * @param nom
+	 */
 	public LectureWindow(String nom) {
 		super(nom);
 
@@ -86,6 +94,9 @@ public class LectureWindow extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Listener des actions
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		{
@@ -95,7 +106,7 @@ public class LectureWindow extends JFrame implements ActionListener {
 				new OpenSelector().open();
 			if (e.getActionCommand().equals("menu_aide")) 
 				JOptionPane.showMessageDialog(null,
-						 "Touches utiles : \nTouches Z-Q-S-D: Déplacement de la page\nTouches ← ou →: Déplacement entre les pages\n"
+						 "Touches utiles : \nTouches Z-Q-S-D: Déplacement de la page\nTouches flèches gauche ou droite: Déplacement entre les pages\n"
 						 + "Touche R: Reset de la page\nMolette de la souris: Réglage du zoom\nTouche F: Aller à une page",
 						 "Aide",
 						 JOptionPane.INFORMATION_MESSAGE);

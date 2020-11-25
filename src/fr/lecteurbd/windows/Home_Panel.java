@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -15,11 +14,25 @@ import javax.swing.*;
 
 import fr.lecteurbd.utils.OpenSelector;
 
+/**
+ * Classe du panel de la fenetre d'acceuil
+ * @author Lucas POLLET - Jean PERRUT
+ *
+ */
 public class Home_Panel extends JPanel implements ActionListener{
 
+	/**
+	 * Variable de stockage de l'image d'acceuil
+	 */
 	Image acceuil;
+	/**
+	 * Bouton ouvrir
+	 */
 	JButton ouvrir;
 	
+	/**
+	 * Constructeur du panel
+	 */
 	public Home_Panel() {
 		setPreferredSize(new Dimension(400,500));
 
@@ -40,6 +53,9 @@ public class Home_Panel extends JPanel implements ActionListener{
 		
 	}	
 	
+	/**
+	 * Fonction qui dessine les composants
+	 */
 	public void paintComponent(Graphics g){
 		g.drawImage(acceuil, 0, 0, this);
 		
@@ -50,6 +66,9 @@ public class Home_Panel extends JPanel implements ActionListener{
 		
 	}
 
+	/**
+	 * Listener des actions
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("bouton_ouvrir")) {
