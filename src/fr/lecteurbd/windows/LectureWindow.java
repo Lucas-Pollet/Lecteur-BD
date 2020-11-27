@@ -114,7 +114,7 @@ public class LectureWindow extends JFrame implements ActionListener {
 			if (e.getActionCommand().equals("menu_aide")) 
 				JOptionPane.showMessageDialog(null,
 						 "Touches utiles : \nTouches Z-Q-S-D: Déplacement de la page\nTouches flèches gauche ou droite: Déplacement entre les pages\n"
-						 + "Touche R: Reset de la page\nMolette de la souris: Réglage du zoom\nTouche F: Aller à  une page",
+						 + "Touche R: Reset de la page\nMolette de la souris: Réglage du zoom\nTouche F: Aller à une page",
 						 "Aide",
 						 JOptionPane.INFORMATION_MESSAGE);
 			
