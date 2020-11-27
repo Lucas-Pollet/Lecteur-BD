@@ -34,6 +34,7 @@ public class LectureWindow extends JFrame implements ActionListener {
 		super(nom);
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setSize(800,800);
 		setLocationRelativeTo(null);
 
 		setBackground(Color.GRAY);
@@ -67,7 +68,6 @@ public class LectureWindow extends JFrame implements ActionListener {
 		morehelp.setActionCommand("menu_aide");
 		morehelp.addActionListener(this);
 		
-		
 		pack();
 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -77,8 +77,8 @@ public class LectureWindow extends JFrame implements ActionListener {
 		// Sauvegarde de la page en cours
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) {
-
+			public void windowClosing(WindowEvent e) {									
+			
 				try {
 					DataOutputStream fW  = new DataOutputStream(new FileOutputStream("src/tmp/"+Main.bd.getNameBD()+"/page.dat"));
 					try {
@@ -91,7 +91,6 @@ public class LectureWindow extends JFrame implements ActionListener {
 				}
 			}
 		});
-
 	}
 
 	/**
@@ -100,14 +99,22 @@ public class LectureWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		{
-			if (e.getActionCommand().equals("menu_quitter"))
-				System.exit(0);
+			if (e.getActionCommand().equals("menu_quitter")) {	
+					String options[] = {"Oui", "Non"};
+					int retour = JOptionPane.showOptionDialog(null,
+							"Voulez-vous quitter l'application ?", "Quitter",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
+					if(retour == 0)  
+						System.exit(0);			
+				}
+			
 			if (e.getActionCommand().equals("menu_ouvrir"))
 				new OpenSelector().open();
 			if (e.getActionCommand().equals("menu_aide")) 
 				JOptionPane.showMessageDialog(null,
-						 "Touches utiles : \nTouches Z-Q-S-D: DÃ©placement de la page\nTouches flÃ¨ches gauche ou droite: DÃ©placement entre les pages\n"
-						 + "Touche R: Reset de la page\nMolette de la souris: RÃ©glage du zoom\nTouche F: Aller Ã  une page",
+						 "Touches utiles : \nTouches Z-Q-S-D: Déplacement de la page\nTouches flèches gauche ou droite: Déplacement entre les pages\n"
+						 + "Touche R: Reset de la page\nMolette de la souris: Réglage du zoom\nTouche F: Aller à  une page",
 						 "Aide",
 						 JOptionPane.INFORMATION_MESSAGE);
 			
